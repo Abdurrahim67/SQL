@@ -1,11 +1,11 @@
 --Personel isminde bir tablo olusturalim
 create table personel(
 pers_id int,
-    isim varchar(30),
-    sehir varchar(30),
-    maas int,
-    sirket varchar(20),
-    adres varchar(50)
+isim varchar(30),
+sehir varchar(30),
+maas int,
+sirket varchar(20),
+adres varchar(50)
 );
 --Varolan personel tablosundan pers_id, sehir, adres, field'larina sahip personel_adres adinda yeni bir tablo olusturalim
 create table personel_adres
@@ -95,6 +95,9 @@ DELETE FROM ogrenciler WHERE isim='Ali Can'or id= 123;
 -- Ancak, seçmeli silme yapamaz
 select * from ogrenciler;
 TRUNCATE TABLE ogrenciler
+
+
+
 -- DDL - Data Definition Lang.
 -- CREATE - ALTER - DROP
 -- ALTER TABLE --
