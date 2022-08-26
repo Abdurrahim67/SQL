@@ -36,38 +36,33 @@ INSERT INTO urunler VALUES(104, 1007,'Phone', 'Aslan Yılmaz');
 select*from tedarikciler;
 select*from urunler;
 
+
+
 --  vergi_no’su 102 olan tedarikcinin firma ismini 'Vestel' olarak güncelleyeniz.
-UPDATE tedarikciler
-SET firma_ismi='Vestel' WHERE vergi_no=102;
-
-
+update tedarikciler
+set firma_ismi='Vestel' where vergi_no=102;
 
 -- vergi_no’su 101 olan tedarikçinin firma ismini 'casper' ve irtibat_ismi’ni 'Ali Veli' olarak güncelleyiniz.
-UPDATE tedarikciler
-set firma_ismi='casper',irtibat_ismi='ALi Veli' where vergi_no=101;
+update tedarikciler
+set firma_ismi='Casper' ,irtibat_ismi='Ali Veli' where vergi_no='101';
 
 
 --  urunler tablosundaki 'Phone' değerlerini 'Telefon' olarak güncelleyiniz.
-Update ürünler 
-set urun_isim='Telefon' where urun_isim=´'Phone';
+update urunler
+set urun_isim='Telefon'  where urun_isim='Phone';
 
 --  urunler tablosundaki urun_id değeri 1004'ten büyük olanların urun_id’sini 1 arttırın.
-Update urunler
-set urun_id=urun_id+1 where urun_id>1004;
+update urunler
+set urun_id=urun_id+1  where urun_id>1004;
 
 
 -- urunler tablosundaki tüm ürünlerin urun_id değerini ted_vergino sutun değerleri ile toplayarak güncelleyiniz.
-Update urunler 
+update urunler
 set urun_id=urun_id+ted_vergino;
 
 --urunler tablosundan Ali Bak’in aldigi urunun ismini, tedarikci tablosunda irtibat_ismi
 -- 'Adam Eve' olan firmanın ismi (firma_ismi) ile degistiriniz.
 
--- Bu soruda tedarikçiler ve urunler tablosunu yeniden oluşturduk
 update urunler
-set urun_isim = (select firma_ismi from tedarikciler where irtibat_ismi='Adam Eve')
-where musteri_isim = 'Ali Bak';
-
-
-
-
+set urun_isim=(select firma_ismi  from tedarikciler where irtibat_ismi='Adam Eve')
+where musteri_isim='Ali Bak';
