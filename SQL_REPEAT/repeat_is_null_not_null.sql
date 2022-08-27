@@ -38,33 +38,6 @@ select*from insanlar where ssn is not null;
 -- adres i null  olmayanlari olanlari sorgula
 select*from insanlar where adres is not null;
 
--- isim 'i NULL olan kişilerin isim'ine NO NAME atayınız.
-update insanlar set isim='NO NAME' where isim is null;
-
-
--- Tabloyu bir önceki soruyu çözmeden önceki haline geri getirin
-update insanlar set isim=null where isim='NO NAME';
-
--- not: coklu degisimde her degisim icin set ... where isim is null gibi ifade yazmamak icin
--- COALESCE (birlestirme) kullanilir
-
-
-/* --soru--
-isim 'i NULL olanlara 'Henuz isim girilmedi'
-adres 'i NULL olanlara 'Henuz adres girilmedi'
-ssn 'i NULL olanlara ' no ssn' atayalım.
-*/
-
-update insanlar
-set isim =coalesce (isim, 'HENUZ ISIM GRILMEDI'),
-	adres=coalesce (adres,'HEHNUZ ADRES GIRILMEDI'),
-	ssn=coalesce (ssn, 'NO SSN')
-
-select*from insanlar;
-
-
-
-
 
 
 

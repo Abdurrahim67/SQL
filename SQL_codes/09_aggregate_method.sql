@@ -62,5 +62,6 @@ SELECT MAX(maas) as enyuksek_ucuncu_maas from calisanlar2
 WHERE maas<(select max(maas)from calisanlar2 WHERE maas< (SELECT max(maas) from calisanlar2))
 
 --En düşük üçüncü maas değerini bulununuz (ÖDEV)
-
+select min(maas) as en_dusuk3Maas from calisanlar_r
+where maas >(select min(maas) from calisanlar_r where maas> (select min(maas) from calisanlar_r));
 

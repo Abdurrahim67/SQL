@@ -1,0 +1,54 @@
+
+
+--TASK 1-->ögrenci adinda bir tablosu olusturunuz
+>>BASLIKLAR<<<
+
+ögrenci no
+ad
+soyad
+bölüm
+not_ortalamasi
+
+
+--7 ogrencinin ( 2 si Erasmus) data girisini yapiniz ve listeleyiniz
+** Transaction**
+--Yeni kaydolan   3 ögrenciyi sonradan ekleyiniz 
+--Eski listeden 2 ogrenciyi siliniz 
+-- tablonun ismini güncel_ogrenci_listesi seklinde degistiriniz
+--güncel listeyi yazdiriniz
+--Tabloyu siliniz
+
+
+
+
+--TASK 2-->personel adinda bir tablosu olusturunuz
+>>BASLIKLAR<<<
+
+personel id
+ad
+soyad
+maas
+adres
+
+--personel id leri primary key yapiniz(key ismi 'pers_id' olsun)
+-- isimleri  Uniq yapiniz
+--personel tablosuna cinsiyet ve departman sutunlari(field) ekleyiniz
+--5 personelin  data girisini yapiniz ve listeleyiniz
+--Ise yeni baslayan  2 personeli  ekleyiniz 
+-- maas field ini siliniz
+--adres field ini sehir olarak degistiriniz
+-- tablonun ismini 'güncel_ogrenci_listesi' seklinde degistiriniz
+--güncel listeyi yazdiriniz
+
+
+--TASK 3--> adresler adinda bir tablo olusturunuz ve foreign key ile
+ personel tablosunu iliskilendiriniz
+>>BASLIKLAR<<
+
+adres_id
+sokak
+cadde
+sehir
+
+--tabloyu yazdiriniz
+
