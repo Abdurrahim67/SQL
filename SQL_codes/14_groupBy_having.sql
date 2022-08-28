@@ -13,6 +13,11 @@ group by ulke
 having avg(maas)>3000;
 
 ----Erkek çalışanların sayısı 1’den fazla olan ülkelerin maaş ortalamasını getiren sorgu
-select ulke, round(avg(maas)) as "maas ortalaması", count(*) as calisan_sayisi
+select ulke, round(avg(maas),2) as maas_ortalamasi
 from personel where cinsiyet='E'
-group by ulke HAVING count(cinsiyet) > 1
+group by ulke having count(cinsiyet)>1;
+
+select ulke, round(avg(maas),2) as maas_ortalamasi, count(*) as calisan_sayisi
+from personel where cinsiyet='E'
+group by ulke having count(cinsiyet)>1;
+

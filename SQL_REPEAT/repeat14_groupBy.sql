@@ -62,41 +62,50 @@ insert into personel values(119, 'Ayten', 'Tan', '32', 'K', 'Roma', 'Italya', '3
 select*from manav;
 select*from personel;
 
--- personelin calıştığı ülkeleri listeleyiniz
-SELECT ulke from personel group by ulke;
+-- kisi ismine göre satılan toplam meyve miktarlarını gösteren sorguyu yazınız.
+select isim, sum(urun_miktari) as toplam_urun from manav group by isim;
 
--- Ülkelere göre ortalama maaşları listeleyiniz
-select ulke, round(avg(maas),2) as ortalama_maas
-from personel
-group by ulke;
+-- satılan meyve türüne (urun_adi) göre urun alan kişi sayısını gösteren-- sorguyu yazınız. 
+--NULL olarak girilen meyveyi listelemesin.
+
+select urun_adi,count(isim) as kisi_sayisi from manav where urun_adi is not null group by urun_adi;
+
+-- satılan meyve türüne (urun_adi) göre satılan (urun_miktari )MIN ve -- MAX urun miktarlarini, MAX urun miktarina göre
+--sıralayarak listeyen sorguyu yazınız.
+
+select urun_adi, max(urun_miktari) as max_urun_miktari, min(urun_miktari) min_urun_miktari from manav
+where urun_adi is not null group by urun_adi order by max_urun_miktari;
+
+-- kisi ismine ve urun adına göre satılan ürünlerin toplamını gruplandıran
+-- ve isime göre ters sırasıda listeyen sorguyu yazınız.
+
+select isim, urun_adi, sum(urun_miktari) as urun_miktari_toplam from manav group by isim, urun_adi order by isim desc;
+
+-- personelin calıştığı ülkeleri listeleyiniz
+select ulke from personel group by ulke;
+
+--ulkelere gore ortalama maaslari listeleyiniz 
+select ulke, round(avg(maas),2) as ortalama_maas from personel group by ulke;
 
 -- Maas ortalamasını bayanlar ve baylar olarak sorgulayınız
-SELECT cinsiyet, round(avg(maas)) as ortalama_maas 
-from personel
-group by cinsiyet;
+select cinsiyet,round(avg(maas),3) as maas_ortalamasi from personel group by cinsiyet;
 
--- Personeli, ulkelere göre ve şehirlere göre gruplayarak sorgulayın
-SELECT ulke,sehir from personel
-group by ulke,sehir;
+-- Personelin, ulkelere göre ve şehirlere göre gruplayarak sorgulayın
+select ulke,sehir from personel group by ulke,sehir;
 
 -- Personelin, ulkelere göre ve şehirler göre calışan sayısını sorgulayın.
-SELECT ulke,sehir, count(sehir) as calisan_sayisi from personel
-group by ulke,sehir;
+select ulke,sehir, count(ad) as calisan_sayisi from personel group by ulke,sehir;
 
 -- Her ulke için bay ve bayan çalışan sayısı ve yaş ortalamasını sorgulayınız.
-SELECT ulke,cinsiyet,count(*) as calisan_sayisi, round(avg(yas)) as yas_ortalamasi from personel
-group by ulke, cinsiyet;
+select ulke,cinsiyet, count(ad) as calisan_kisi_sayisi, round(avg(yas),2) as yas_ortalamasi from personel group by ulke,cinsiyet;
 
--- Her ulke için bay ve bayan çalışan sayısı ve yaş ortalamasını ve maası 30000 den büyük olanları sorgulayınız.
-SELECT ulke, cinsiyet, round(avg(yas)) as ortalama_yas, count(*) from personel
-WHERE maas>30000
-group by ulke,cinsiyet;
 
--- Her ulke için; bay ve bayan çalışan sayısı, yaş ortalamasını, maaşı 30000 den büyük olanları
--- ve ortalama yaşı büyükten küçüğe doğru sıralayınız.
-SELECT ulke, cinsiyet, round(avg(yas)) as ortalama_yas, count(*) 
-from personel
-where maas>30000
-group by ulke, cinsiyet
-order by ortalama_yas desc;
+-- Her ulke için bay ve bayan çalışan sayısı ve yaş ortalamasını 
+--ve maası 30000 den büyük olanları sorgulayınız
+select ulke,cinsiyet, count(ad) as calisan_sayisi, round(avg(maas),2) as maas_ortalamasi from personel where maas>3000 group by ulke,cinsiyet;
 
+
+
+-- Her ulke için; bay ve bayan çalışan sayısı, yaş ortalamasını, maaşı 30000 den büyük olanları-- ve 
+--ortalama yaşı büyükten küçüğe doğru sıralayınız.
+select ulke,cinsiyet,count(ad) as caslisan_sayisi, round(avg(yas),2)as yas_ortalamasi from personel where maas>3000 group by ulke,cinsiyet order by yas_ortalamasi desc;
