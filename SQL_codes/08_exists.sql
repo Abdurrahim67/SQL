@@ -40,20 +40,28 @@ select *from nisan
 --URUN_ID’lerini listeleyen ve aynı zamanda bu ürünleri MART ayında alan
 --MUSTERI_ISIM 'lerini listeleyen bir sorgu yazınız.
 
-select urun_isim,musteri_isim from mart
-where exists (select musteri_isim from nisan where mart.urun_id = nisan.urun_id);
+SELECT urun_id,musteri_isim 
+FROM mart
+WHERE  exists (SELECT urun_id FROM nisan WHERE mart.urun_id = nisan.urun_id);
 
 --Her iki ayda birden satılan ürünlerin URUN_ISIM'lerini ve bu ürünleri
 --NİSAN ayında satın alan MUSTERI_ISIM'lerini listeleyen bir sorgu yazınız.
 
-select urun_isim, musteri_isim from nisan
-where exists (select urun_isim from mart where mart.urun_isim=nisan.urun_isim);
+SELECT urun_isim, musteri_isim 
+FROM nisan
+WHERE exists (SELECT urun_isim FROM mart WHERE mart.urun_isim=nisan.urun_isim);
+
+
+
+
+
 
 --Her iki ayda ortak satilmayan ürünlerin URUN_ISIM'lerini ve  bu ürünleri
 --NİSAN ayında satın alan MUSTERI_ISIM'lerini listeleyen bir sorgu yazınız.
 
-select urun_isim,musteri_isim from nisan 
-where not exists (select urun_isim from mart where mart.urun_isim=nisan.urun_isim);
+SELECT urun_isim,musteri_isim
+FROM nisan 
+WHERE not exists (SELECT urun_isim FROM mart WHERE mart.urun_isim=nisan.urun_isim);
 
 
 

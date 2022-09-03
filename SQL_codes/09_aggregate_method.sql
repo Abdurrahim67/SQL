@@ -6,62 +6,74 @@
 SYNTAX: sum() şeklinde olmalı sum () arasında boşluk olmamalı
 */
 
-select *from calisanlar2
+SELECT *FROM calisanlar2
 
 
 -- Çalısanlar2 tablosundaki en yüksek maaş değerini listeleyiniz
-SELECT max(maas) from calisanlar2
+SELECT max(maas)
+FROM calisanlar2
 
 --Calisanlar tablosundaki maaşların toplamını listeleyiniz
-SELECT sum(maas) from calisanlar2
+SELECT sum(maas)
+FROM calisanlar2
 
---Calıcanlar tablosundaki maas ortalamalını listeleyiniz
-SELECT avg(maas) from calisanlar2
-SELECT round(avg(maas)) from calisanlar2
-SELECT round(avg(maas),2) from calisanlar2
---
---Calisanlar toplasundan en düşük maası listeleyiniz
-SELECT min(maas) from calisanlar2
+--Calısanlar tablosundaki maas ortalamasini listeleyiniz
+SELECT avg(maas)
+FROM calisanlar2
+
+SELECT round(avg(maas))
+FROM calisanlar2
+
+SELECT round(avg(maas),2)
+FROM calisanlar2
+
+--Calisanlar taplosundan en düşük maası listeleyiniz
+SELECT min(maas)
+FROM calisanlar2
 
 --Calisanlar tablosundaki kaç kişinin maaş aldığını listeleyiniz
-SELECT count(maas) from calisanlar2
+SELECT count(maas)
+FROM calisanlar2
 
 
-select * from markalar;
+SELECT * FROM markalar;
 
 -- Her markanin ismini, calisan sayisini ve o markaya ait calisanlarin toplam maaşini listeleyiniz
-
-select marka_isim,calisan_sayisi,(select sum (maas)from calisanlar2 where marka_isim=isyeri)
-as toplam_maas from markalar;
+SELECT marka_isim,calisan_sayisi,
+(SELECT sum (maas)FROM calisanlar2 WHERE marka_isim=isyeri)AS toplam_maas FROM markalar;
 
 -- ALIAS (AS) --> Tabloda geçici isim vermek istersek koşuldan sonra AS sutun_isim olarak kullanılır.
 
--- Her markanin ismini, calisan sayisini ve o markaya ait calisanlarin maksimum ve minumum maaşini listeleyen bir Sorgu yaziniz.
-select marka_isim,calisan_sayisi,(select min(maas) from calisanlar2 where marka_isim=isyeri)
-as min_maas,(select max(maas) from calisanlar2 where marka_isim=isyeri) 
-as max_maas from markalar;
+-- Her markanin ismini, calisan sayisini ve o markaya ait calisanlarin maksimum ve minumum maaşini listeleyen bir sorgu yaziniz.
+SELECT marka_isim,calisan_sayisi,
+(SELECT min(maas) FROM calisanlar2 WHERE marka_isim=isyeri) AS min_maas,
+(SELECT max(maas) FROM calisanlar2 WHERE marka_isim=isyeri) AS max_maas FROM markalar;
 
 
 
 --Her markanin id’sini, ismini ve toplam kaç şehirde bulunduğunu listeleyen bir SORGU yaziniz.
 
-select marka_id,marka_isim,(select count(sehir) from calisanlar2 where marka_isim=isyeri ) 
-as sehir_sayisi from markalar;
+SELECT marka_id,marka_isim,
+(SELECT count(sehir)FROM calisanlar2 WHERE marka_isim=isyeri ) AS sehir_sayisi from markalar;
 
 
 --Interview Question: En yüksek ikinci maas değerini çağırın.
-SELECT max(maas) AS enyuksek_ikinci_maas from calisanlar2 
-WHERE maas < (SELECT max(maas) from calisanlar2)
+SELECT max(maas) AS enyuksek_ikinci_maas
+FROM calisanlar2 
+WHERE maas < (SELECT max(maas) from calisanlar2);
 
 ----Interview Question: En düşük ikinci maas değerini çağırın.
-select min(maas) as en_dusuk_ikinci_maas from calisanlar2
-where maas >(select min(maas) from calisanlar2)
+SELECT min(maas) AS en_dusuk_ikinci_maas
+FROM calisanlar2
+WHERE maas >(SELECT min(maas) FROM calisanlar2);
 --En yüksek üçüncü maas değerini bulun
 
-SELECT MAX(maas) as enyuksek_ucuncu_maas from calisanlar2
-WHERE maas<(select max(maas)from calisanlar2 WHERE maas< (SELECT max(maas) from calisanlar2))
+SELECT max(maas) AS enyuksek_ucuncu_maas
+FROM calisanlar2
+WHERE maas<(SELECT max(maas)FROM calisanlar2 WHERE maas< (SELECT max(maas) FROM calisanlar2));
 
 --En düşük üçüncü maas değerini bulununuz (ÖDEV)
-select min(maas) as en_dusuk3Maas from calisanlar_r
-where maas >(select min(maas) from calisanlar_r where maas> (select min(maas) from calisanlar_r));
+SELECT min(maas)AS en_dusuk_ucuncu_maas
+FROM calisanlar_r
+WHERE maas >(SELECT min(maas) FROM calisanlar_r WHERE maas> (SELECT min(maas) FROM calisanlar_r));
 

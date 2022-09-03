@@ -1,4 +1,5 @@
 -- SUBQUERIES --> SORGU içinde çalışan SORGUYA(Alt sorgu) denir
+
 CREATE TABLE calisanlar2
 (
 id int,
@@ -6,7 +7,8 @@ isim VARCHAR(50),
 sehir VARCHAR(50),
 maas int,
 isyeri VARCHAR(20)
-);
+); 
+
 INSERT INTO calisanlar2 VALUES(123456789, 'Ali Seker', 'Istanbul', 2500, 'Vakko');
 INSERT INTO calisanlar2 VALUES(234567890, 'Ayse Gul', 'Istanbul', 1500, 'LCWaikiki');
 INSERT INTO calisanlar2 VALUES(345678901, 'Veli Yilmaz', 'Ankara', 3000, 'Vakko');
@@ -22,6 +24,7 @@ marka_id int,
 marka_isim VARCHAR(20),
 calisan_sayisi int
 );
+
 INSERT INTO markalar VALUES(100, 'Vakko', 12000);
 INSERT INTO markalar VALUES(101, 'Pierre Cardin', 18000);
 INSERT INTO markalar VALUES(102, 'Adidas', 10000);
@@ -32,19 +35,44 @@ select * from markalar
 
 
 
--- calisan sayisi 15.000’den cok olan markalarin isimlerini ve
---bu markada calisanlarin isimlerini ve maaşlarini listeleyin.
-select isim,maas,sehir from calisanlar2
-where isyeri in(select marka_isim from markalar where calisan_sayisi>1500);
+--calisan sayisi 15000’den cok olan markalarin isimlerini ve bu markada calisanlarin 
+--isimlerini,maaşlarini listeleyin.
 
--- marka_id’si 101’den büyük olan marka çalişanlarinin isim, maaş ve şehirlerini listeleyiniz.
-select isim,maas,sehir from calisanlar2
-where isyeri in(select marka_isim from markalar where marka_id>101);
+SELECT isim,maas,isyeri
+FROM calisanlar2
+WHERE isyeri IN(SELECT marka_isim FROM markalar WHERE calisan_sayisi>15000);
 
--- Ankara’da calisani olan markalarin marka id'lerini ve calisan sayilarini listeleyiniz.
-select marka_id, calisan_sayisi from markalar
-where marka_isim in(select isyeri from calisanlar2 where sehir='Ankara');
+--2 marka_id’si 101’den büyük olan marka çalişanlarinin isim, maaş ve şehirlerini listeleyiniz.
 
+SELECT isim,maas,sehir
+FROM calisanlar2
+WHERE isyeri IN(SELECT marka_isim FROM markalar WHERE marka_id>101);
+
+--3 Ankara’da calisani olan markalarin marka id'lerini ve calisan sayilarini listeleyiniz.
+
+SELECT marka_id, calisan_sayisi 
+FROM markalar
+WHERE marka_isim IN(SELECT isyeri FROM calisanlar2 WHERE sehir='Ankara');
+
+
+
+
+
+-- 4-- maasi 2000 den fazla olan calisanlarin marka_id ve marka_isimlerini listeyiniz
+
+SELECT marka_id,marka_isim
+FROM markalar
+WHERE marka_isim IN(SELECT isyeri FROM calisanlar2 WHERE maas>2000);
+
+-- 5-- marka ismi Vakko olan calisanlarin isim ve sehirlerini listeleyiniz
+
+SELECT isim, sehir
+FROM calisanlar2
+WHERE isyeri='Vakko';
+
+SELECT isim, sehir
+FROM calisanlar2
+WHERE isyeri IN(SELECT marka_isim FROM markalar WHERE marka_isim='Vakko'); 
 
 
 
